@@ -15,7 +15,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2" href="/projects/" id="research-link">
+            <a class="nav-link mx-2" href="/projects/" id="projects-link">
                 <i class="bi-speedometer"></i>
                 Research
             </a>
@@ -61,8 +61,8 @@
     }
     const url = getCurrentURL();
 
-    if(url.includes("/research/")) {
-        $("#research-link").addClass('active');
+    if(url.includes("/projects/")) {
+        $("#projects-link").addClass('active');
     } else if(url.includes("/students/")) {
         $("#students-link").addClass('active');
     } else if(url.includes("/publications/")) {

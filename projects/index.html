@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="h-100">
+    <head>
+        <title>Projects | Sabbir Ahmed</title>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="/assets/styles/font-awesome-4.7.0/css/font-awesome.css">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    </head>
+    <body class="d-flex flex-column h-100">
+
+        <header id="header">
+            <script>
+                $(function() {
+                    $("#header").load("/assets/html/header.html");
+                });
+              </script>
+        </header>
+
+        <main class="flex-shrink-1 mb-5">
+            <div class="container pt-4" style="max-width:1000px;">
+                <h1>Projects</h1>
+                <p class="lead">My Projects.</p>
+                <hr>
+                
+                <div class="card mb-5 shadow">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="/assets/img_projects/ebay2024.png" class="img-fluid rounded-start h-100" alt="eBay 2024 Competition" style="object-fit: cover;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title">eBay 2024 University ML Competition</h3>
+                                <h5 class="card-subtitle mb-2 text-muted">Vehicle Parts Compatibility Extraction - 2nd Runner-up</h5>
+                                <p class="card-text">Developed a machine learning solution to extract vehicle parts compatibility (fitment) data from eBay listings:</p>
+                                <ul>
+                                    <li>Data Preparation: Converted raw HTML data to clean text using Qwen2.5-32B-Instruct for noise reduction and irrelevant information removal</li>
+                                    <li>Model Development: Fine-tuned two open-source LLMs (Mistral-Nemo and Qwen2.5-14B) using k-fold LoRA strategy on labeled training data</li>
+                                    <li>Ensemble Approach: Implemented majority voting strategy to combine predictions from both models</li>
+                                    <li>Results: Achieved 79.6% F0.2 score, securing second runner-up position in the competition</li>
+                                </ul>
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <span class="badge bg-primary">LLMs</span>
+                                    <span class="badge bg-secondary">Information Extraction</span>
+                                    <span class="badge bg-success">LoRA Fine-tuning</span>
+                                    <span class="badge bg-info text-dark">Model Ensemble</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-5 shadow">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="/assets/img_projects/ebay2023.png" class="img-fluid rounded-start h-100" alt="eBay 2023 Competition" style="object-fit: cover;">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title">eBay 2023 University ML Competition</h3>
+                                <h5 class="card-subtitle mb-2 text-muted">Named Entity Recognition - 2nd Runner-up</h5>
+                                <p class="card-text">Built a model to extract and label named entities from eBay item titles:</p>
+                                <ul>
+                                    <li>Teacher-Student Framework: Implemented a teacher-student training approach with XLM-ROBERTA and ELECTRA models</li>
+                                    <li>Semi-supervised Learning: Generated pseudo labels on unlabeled data using the teacher model while filtering uncertain samples</li>
+                                    <li>Advanced Training: Employed k-fold training and ensemble strategies to combine predictions from both model architectures</li>
+                                    <li>Results: Achieved an F1 score of 94.37%, securing second runner-up position in the challenge</li>
+                                </ul>
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <span class="badge bg-primary">NLP</span>
+                                    <span class="badge bg-secondary">Named Entity Recognition</span>
+                                    <span class="badge bg-success">Semi-supervised Learning</span>
+                                    <span class="badge bg-info text-dark">Ensemble Methods</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer mt-auto py-3 bg-light border border-top" id="footer">
+            <script>
+                $(function() {
+                    $("#footer").load("/assets/html/footer.html");
+                });
+            </script>
+        </footer>
+        
+    </body>
+</html>
