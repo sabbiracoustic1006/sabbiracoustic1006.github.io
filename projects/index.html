@@ -60,9 +60,9 @@
                                 <h5 class="card-subtitle mb-2 text-muted">Vehicle Parts Compatibility Extraction - 2nd Runner-up</h5>
                                 <p class="card-text">Developed a machine learning solution to extract vehicle parts compatibility (fitment) data from eBay listings:</p>
                                 <ul>
-                                    <li>Data Preparation: Converted raw HTML data to clean text using Qwen2.5-32B-Instruct for noise reduction and irrelevant information removal</li>
-                                    <li>Model Development: Fine-tuned two open-source LLMs (Mistral-Nemo and Qwen2.5-14B) using k-fold LoRA strategy on labeled training data</li>
-                                    <li>Ensemble Approach: Implemented majority voting strategy to combine predictions from both models</li>
+                                    <li>Data Preparation: Converted raw HTML data to text and cleaned text using Qwen2.5-32B-Instruct for noise reduction and irrelevant information removal</li>
+                                    <li>Model Development: Fine-tuned (k-fold) two open-source LLMs (Mistral-Nemo and Qwen2.5-14B) using LoRA on labeled training data</li>
+                                    <li>Ensemble Approach: Implemented majority voting strategy to combine predictions from k-fold models</li>
                                     <li>Results: Achieved 79.6% F0.2 score, securing second runner-up position in the competition</li>
                                 </ul>
                                 <div class="d-flex flex-wrap gap-2 mt-4">
@@ -89,7 +89,7 @@
                                 <ul>
                                     <li>Teacher-Student Framework: Implemented a teacher-student training approach with XLM-ROBERTA and ELECTRA models</li>
                                     <li>Semi-supervised Learning: Generated pseudo labels on unlabeled data using the teacher model while filtering uncertain samples</li>
-                                    <li>Advanced Training: Employed k-fold training and ensemble strategies to combine predictions from both model architectures</li>
+                                    <li>Advanced Training: Used k-fold training and ensemble strategies to combine predictions from the k-fold models</li>
                                     <li>Results: Achieved an F1 score of 94.37%, securing second runner-up position in the challenge</li>
                                 </ul>
                                 <div class="d-flex flex-wrap gap-2 mt-4">
