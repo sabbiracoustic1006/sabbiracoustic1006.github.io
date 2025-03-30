@@ -1,5 +1,3 @@
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light border border-bottom">
     <div class="container" style="max-width: 1000px">
       <a class="navbar-brand link-dark" href="/" id="name-link">Sabbir Ahmed</a>
@@ -50,6 +48,12 @@
                 Contact
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="/blogs/" id="blogs-link">
+                <i class="bi bi-journal-text"></i>
+                Blogs
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -71,6 +75,8 @@
         $("#teaching-link").addClass('active');
     } else if(url.includes("/service/")) {
         $("#service-link").addClass('active');
+    } else if(url.includes("/blogs/")) {
+        $("#blogs-link").addClass('active');
     } else if(url.includes("/policies/")) { 
         // do nothin'
     } else {

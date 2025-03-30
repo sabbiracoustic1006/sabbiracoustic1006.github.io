@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="h-100">
+    <head>
+        <title>Blogs | Sabbir Ahmed</title>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="/assets/styles/font-awesome-4.7.0/css/font-awesome.css">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <style>
+            .blog-preview {
+                transition: transform 0.3s ease;
+            }
+            
+            .blog-preview:hover {
+                transform: translateY(-5px);
+            }
+            
+            .blog-date {
+                font-size: 0.9rem;
+                color: #6c757d;
+            }
+            
+            .blog-tag {
+                font-size: 0.8rem;
+            }
+        </style>
+    </head>
+
+    <body class="d-flex flex-column h-100">
+    
+        <header id="header">
+            <script>
+                $(function() {
+                    $("#header").load("/assets/html/header.html");
+                });
+            </script>
+        </header>
+
+        <main class="flex-shrink-1 mb-5">
+            <div class="container pt-4" style="max-width:1000px;">
+                <h1>Blogs</h1>
+                <p class="lead">Thoughts and insights on machine learning, security, and AI research</p>
+                <hr>
+                
+                <!-- Blog Post 1 -->
+                <div class="card mb-4 shadow blog-preview">
+                    <div class="card-body">
+                        <h2 class="card-title">Fine-tuning LLMs for Specialized Tasks: Lessons from the eBay Competition</h2>
+                        <p class="blog-date mb-2">March 15, 2025</p>
+                        <p class="card-text">In this post, I share my experience fine-tuning large language models (LLMs) for the specific task of vehicle parts compatibility extraction. I discuss the challenges we faced during the eBay 2024 competition and how we overcame them using specialized techniques.</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary blog-tag">LLMs</span>
+                            <span class="badge bg-secondary blog-tag">Fine-tuning</span>
+                            <span class="badge bg-success blog-tag">LoRA</span>
+                        </div>
+                        <a href="/blogs/fine-tuning-llms.html" class="btn btn-sm btn-outline-danger">Read More</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="card mb-4 shadow blog-preview">
+                    <div class="card-body">
+                        <h2 class="card-title">Semi-supervised Learning for Named Entity Recognition</h2>
+                        <p class="blog-date mb-2">January 20, 2025</p>
+                        <p class="card-text">This post explores how we implemented a teacher-student framework for named entity recognition in the eBay 2023 competition. I share insights into our approach of generating pseudo-labels on unlabeled data and how filtering uncertain samples improved our model performance.</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary blog-tag">NLP</span>
+                            <span class="badge bg-secondary blog-tag">NER</span>
+                            <span class="badge bg-success blog-tag">Semi-supervised Learning</span>
+                        </div>
+                        <a href="/blogs/semi-supervised-ner.html" class="btn btn-sm btn-outline-danger">Read More</a>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="card mb-4 shadow blog-preview">
+                    <div class="card-body">
+                        <h2 class="card-title">Vision Transformers: Balancing Efficiency and Performance</h2>
+                        <p class="blog-date mb-2">November 5, 2024</p>
+                        <p class="card-text">Vision Transformers have revolutionized computer vision, but their computational demands present challenges for edge deployment. In this blog, I discuss our research on compressing ViT models while maintaining competitive performance.</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary blog-tag">Computer Vision</span>
+                            <span class="badge bg-secondary blog-tag">Vision Transformers</span>
+                            <span class="badge bg-success blog-tag">Model Compression</span>
+                        </div>
+                        <a href="/blogs/vit-compression.html" class="btn btn-sm btn-outline-danger">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer mt-auto py-3 bg-light border border-top" id="footer">
+            <script>
+                $(function() {
+                    $("#footer").load("/assets/html/footer.html");
+                });
+            </script>
+        </footer>
+        
+    </body>
+</html>
