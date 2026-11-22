@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Ms. Pac-Man with Deep RL | Sabbir Ahmed</title>
+        <meta name="description" content="Two changes that make DDQN and Dueling DDQN play Ms. Pac-Man better from pixels: a reshaped reward and a self-supervised ghost-state task. Best agent scores 68.8% higher than the DDQN baseline.">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="/assets/styles/font-awesome-4.7.0/css/font-awesome.css">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <style>
+            :root { --accent: #dc3545; --ink: #212529; --muted: #6c757d; --line: #dee2e6; --soft: #f8f9fa; }
+            .eyebrow { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+            .lede { font-size: 1.15rem; color: #343a40; }
+            .stat { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; height: 100%; background: #fff; }
+            .stat .num { font-size: 1.9rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
+            .stat .lbl { font-size: .9rem; color: #495057; margin-top: 4px; }
+            section { margin-top: 2.6rem; }
+            section h2 { font-size: 1.5rem; font-weight: 700; padding-bottom: .4rem; border-bottom: 2px solid var(--line); margin-bottom: 1rem; }
+            .figure-box { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; }
+            .figure-box figcaption { font-size: .88rem; color: var(--muted); margin-top: 8px; }
+            .diagram-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .diagram-scroll svg { display: block; width: 100%; min-width: 640px; height: auto; }
+            .eq { font-family: "Cambria Math", "Times New Roman", serif; font-size: 1.15rem; background: var(--soft); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 4px; overflow-x: auto; }
+            .bar-row { display: grid; grid-template-columns: 170px 1fr; gap: 10px; align-items: center; margin: 6px 0; }
+            .bar-track { background: var(--soft); border-radius: 4px; height: 28px; position: relative; }
+            .bar { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: .85rem; font-weight: 600; color: #fff; white-space: nowrap; }
+            .bar.base { background: #868e96; } .bar.m1 { background: #f1aeb5; color: #58151c; } .bar.m2 { background: var(--accent); }
+            .bar-label { font-size: .88rem; color: #343a40; }
+            .legend span { display: inline-flex; align-items: center; margin-right: 14px; font-size: .85rem; color: #495057; }
+            .legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; margin-right: 6px; }
+            .table-results td, .table-results th { vertical-align: middle; }
+            .delta-up { color: #198754; font-weight: 600; } .delta-down { color: var(--accent); font-weight: 600; }
+            video.gameplay { width: 100%; max-width: 320px; border-radius: 8px; image-rendering: pixelated; background: #000; }
+            @media (max-width: 575.98px) {
+                .bar-row { grid-template-columns: 1fr; gap: 2px; }
+                .stat .num { font-size: 1.6rem; }
+            }
+        </style>
+    </head>
+    <body class="d-flex flex-column h-100">
+
+        <header id="header">
+            <script>
+                $(function() {
+                    $("#header").load("/assets/html/header.html");
+                });
+            </script>
+        </header>
+
+        <main class="flex-shrink-1 mb-5">
+            <div class="container pt-4" style="max-width:1000px;">
+
+                <nav aria-label="breadcrumb" class="small mb-2">
+                    <a href="/projects/" class="link-danger text-decoration-none">&larr; All projects</a>
+                </nav>
+
+                <p class="eyebrow mb-1">Deep Reinforcement Learning &middot; Course project, UC Riverside &middot; 2022</p>
+                <h1 class="fw-bold">Teaching an Agent to Play Ms.&nbsp;Pac-Man from Pixels</h1>
+                <p class="lede">Two simple changes to DDQN and Dueling DDQN: a reward that tells the agent what actually hurts, and an extra task that makes the network notice whether the ghosts are scared. The best agent scores <strong>68.8% more</strong> than the DDQN baseline.</p>
+
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <a class="btn btn-danger btn-sm" href="/projects/ms-pacman-rl/report.pdf" target="_blank"><i class="bi bi-file-earmark-pdf"></i> Report (PDF)</a>
+                    <a class="btn btn-outline-danger btn-sm" href="https://github.com/sabbiracoustic1006/sabbiracoustic1006.github.io/tree/main/projects/ms-pacman-rl/code" target="_blank"><i class="bi bi-code-slash"></i> Code</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="#method"><i class="bi bi-diagram-3"></i> Method</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="#results"><i class="bi bi-bar-chart"></i> Results</a>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6 col-md-3"><div class="stat"><div class="num">3,156</div><div class="lbl">best mean score over 100 games (Dueling DDQN + ghost-state task)</div></div></div>
+                    <div class="col-6 col-md-3"><div class="stat"><div class="num">+68.8%</div><div class="lbl">vs. the DDQN baseline (1,869)</div></div></div>
+                    <div class="col-6 col-md-3"><div class="stat"><div class="num">+53.6%</div><div class="lbl">DDQN from the reward change alone</div></div></div>
+                    <div class="col-6 col-md-3"><div class="stat"><div class="num">2 / 2</div><div class="lbl">algorithms improved by the ghost-state task</div></div></div>
+                </div>
+
+                <section id="tldr">
+                    <h2>At a glance</h2>
+                    <div class="row g-4 align-items-start">
+                        <div class="col-md-7">
+                            <ul class="mb-0">
+                                <li class="mb-2"><strong>Problem.</strong> Ms. Pac-Man is one of the Atari games where simple value-based agents stay far below human play. The agent sees only raw screen pixels.</li>
+                                <li class="mb-2"><strong>Idea 1: reward shaping.</strong> The default reward gives 0 both for standing still and for dying. I give &minus;1 for a step with no progress and &minus;200 for losing a life.</li>
+                                <li class="mb-2"><strong>Idea 2: an auxiliary task.</strong> The network also predicts whether the ghosts are scared and how many power pills are left. The labels come for free from the reward stream, so no extra labeling is needed.</li>
+                                <li><strong>Outcome.</strong> The reward change lifts DDQN by 53.6%. The auxiliary task lifts both DDQN (+30.4%) and Dueling DDQN (+29.8%). The best agent reaches a mean score of 3,155.9.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5 text-center">
+                            <figure class="figure-box mb-0">
+                                <video class="gameplay" autoplay muted loop playsinline poster="/projects/ms-pacman-rl/img/thumb.png" aria-label="Ms. Pac-Man gameplay by the agent">
+                                    <source src="/projects/ms-pacman-rl/img/gameplay.mp4" type="video/mp4">
+                                </video>
+                                <figcaption>The agent with the ghost-state task, early in training (episode 64 of 5,000), recorded in the Gym environment.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="problem">
+                    <h2>The problem</h2>
+                    <p>The agent plays <code>MsPacman-v0</code> in OpenAI Gym. Each state is the last 4 screen frames, turned to grayscale and resized to 84&times;84 (a 4&times;84&times;84 tensor). There are 9 possible moves. The agent must eat the pellets and avoid four ghosts. After it eats one of the four power pills, the ghosts turn blue (scared) for a short time and can be eaten for bonus points.</p>
+                    <p>Two things make this hard for DDQN-style agents:</p>
+                    <ul>
+                        <li><strong>The reward hides the most important event.</strong> Losing a life gives reward 0, the same as a step where nothing happens. The agent gets no clear signal that touching a dangerous ghost is the worst thing it can do.</li>
+                        <li><strong>The grayscale state hides the ghost's mood.</strong> A scared ghost and a dangerous ghost differ mainly in color. Grayscale input weakens that cue. In training, the agent often ran <em>toward</em> dangerous ghosts and <em>away</em> from scared ones. Adding color back would cost 3&times; more memory and compute.</li>
+                    </ul>
+                </section>
+
+                <section id="method">
+                    <h2>Method</h2>
+                    <figure class="figure-box">
+                        <div class="diagram-scroll">
+                            <svg viewBox="0 0 960 520" role="img" aria-labelledby="dgTitle dgDesc" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+                                <title id="dgTitle">Training pipeline with both modifications</title>
+                                <desc id="dgDesc">The game returns frames and a reward. Frames are preprocessed and stacked. The reward is reshaped (modification 1) and also used to make free labels for ghost state and power pills left. Transitions go to a replay buffer. A shared CNN feeds three heads: Q-values, ghost state, and power pills left. The loss is the DDQN loss plus alpha times the two cross-entropy losses (modification 2).</desc>
+                                <defs>
+                                    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+                                    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/></marker>
+                                </defs>
+                                <!-- Row labels -->
+                                <text x="20" y="28" font-size="13" font-weight="700" fill="#6c757d" letter-spacing="1">1 · COLLECT EXPERIENCE</text>
+                                <text x="112" y="306" font-size="13" font-weight="700" fill="#6c757d" letter-spacing="1">2 · LEARN</text>
+
+                                <!-- Environment -->
+                                <rect x="20" y="48" width="150" height="86" rx="8" fill="#212529"/>
+                                <text x="95" y="84" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Ms. Pac-Man</text>
+                                <text x="95" y="106" text-anchor="middle" font-size="13" fill="#ced4da">Gym MsPacman-v0</text>
+                                <text x="95" y="124" text-anchor="middle" font-size="12" fill="#ced4da">9 actions</text>
+
+                                <!-- Preprocess -->
+                                <line x1="170" y1="76" x2="232" y2="76" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <text x="201" y="68" text-anchor="middle" font-size="12" fill="#495057">frames</text>
+                                <rect x="236" y="48" width="190" height="62" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+                                <text x="331" y="74" text-anchor="middle" font-size="14" font-weight="600" fill="#212529">Preprocess</text>
+                                <text x="331" y="94" text-anchor="middle" font-size="12" fill="#495057">gray · 84×84 · stack 4 · skip 4</text>
+
+                                <!-- reward branch -->
+                                <line x1="170" y1="118" x2="232" y2="160" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <text x="160" y="160" text-anchor="end" font-size="12" fill="#495057">reward r</text>
+                                <rect x="236" y="134" width="190" height="56" rx="8" fill="#fff5f5" stroke="#dc3545" stroke-width="1.5"/>
+                                <text x="331" y="157" text-anchor="middle" font-size="14" font-weight="600" fill="#dc3545">Mod 1 · reward shaping</text>
+                                <text x="331" y="177" text-anchor="middle" font-size="12" fill="#495057">no progress −1 · life lost −200</text>
+
+                                <line x1="170" y1="126" x2="232" y2="228" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <rect x="236" y="204" width="190" height="56" rx="8" fill="#fff5f5" stroke="#dc3545" stroke-width="1.5"/>
+                                <text x="331" y="227" text-anchor="middle" font-size="14" font-weight="600" fill="#dc3545">Free labels from r</text>
+                                <text x="331" y="247" text-anchor="middle" font-size="12" fill="#495057">ghost scared? · power pills left</text>
+
+                                <!-- Replay buffer -->
+                                <line x1="426" y1="79" x2="508" y2="130" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <line x1="426" y1="162" x2="508" y2="152" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <line x1="426" y1="232" x2="508" y2="174" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <rect x="512" y="110" width="200" height="86" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+                                <text x="612" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#212529">Replay buffer</text>
+                                <text x="612" y="163" text-anchor="middle" font-size="12" fill="#495057">(s, a, r′, s′, done,</text>
+                                <text x="612" y="180" text-anchor="middle" font-size="12" fill="#495057">ghost state, pills left)</text>
+
+                                <!-- epsilon-greedy back to env -->
+                                <path d="M712,153 C805,153 815,38 640,38 L215,38 C185,38 160,40 150,46" fill="none" stroke="#adb5bd" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arr)"/>
+                                <text x="520" y="30" text-anchor="middle" font-size="12" fill="#6c757d">action: ε-greedy on the online network</text>
+
+                                <!-- Learn row -->
+                                <line x1="612" y1="196" x2="612" y2="240" stroke="#495057" stroke-width="2"/>
+                                <path d="M612,236 L612,280 L95,280 L95,318" fill="none" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <text x="520" y="274" font-size="12" fill="#495057" text-anchor="middle">sample a batch of 64</text>
+
+                                <rect x="20" y="322" width="150" height="110" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+                                <text x="95" y="352" text-anchor="middle" font-size="14" font-weight="700" fill="#212529">Shared CNN</text>
+                                <text x="95" y="374" text-anchor="middle" font-size="12" fill="#495057">32 · 8×8 / 4</text>
+                                <text x="95" y="392" text-anchor="middle" font-size="12" fill="#495057">64 · 4×4 / 2</text>
+                                <text x="95" y="410" text-anchor="middle" font-size="12" fill="#495057">64 · 3×3 / 1</text>
+
+                                <line x1="170" y1="377" x2="226" y2="377" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <rect x="230" y="342" width="120" height="70" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+                                <text x="290" y="372" text-anchor="middle" font-size="14" font-weight="700" fill="#212529">FC 512</text>
+                                <text x="290" y="392" text-anchor="middle" font-size="12" fill="#495057">features</text>
+
+                                <!-- Heads -->
+                                <line x1="350" y1="365" x2="436" y2="322" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <line x1="350" y1="377" x2="436" y2="392" stroke="#dc3545" stroke-width="2" marker-end="url(#arrR)"/>
+                                <line x1="350" y1="389" x2="436" y2="462" stroke="#dc3545" stroke-width="2" marker-end="url(#arrR)"/>
+
+                                <rect x="440" y="296" width="200" height="52" rx="8" fill="#fff" stroke="#212529" stroke-width="1.5"/>
+                                <text x="540" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#212529">Q(s, a) · 9 values</text>
+                                <text x="540" y="337" text-anchor="middle" font-size="12" fill="#495057">(Dueling: V(s) + A(s, a))</text>
+
+                                <rect x="440" y="366" width="200" height="52" rx="8" fill="#fff5f5" stroke="#dc3545" stroke-width="1.5"/>
+                                <text x="540" y="388" text-anchor="middle" font-size="14" font-weight="700" fill="#dc3545">Ghost state · 2 classes</text>
+                                <text x="540" y="407" text-anchor="middle" font-size="12" fill="#495057">scared or dangerous</text>
+
+                                <rect x="440" y="436" width="200" height="52" rx="8" fill="#fff5f5" stroke="#dc3545" stroke-width="1.5"/>
+                                <text x="540" y="458" text-anchor="middle" font-size="14" font-weight="700" fill="#dc3545">Power pills left · 5 classes</text>
+                                <text x="540" y="477" text-anchor="middle" font-size="12" fill="#495057">0, 1, 2, 3 or 4</text>
+
+                                <!-- Losses -->
+                                <line x1="640" y1="322" x2="700" y2="322" stroke="#495057" stroke-width="2" marker-end="url(#arr)"/>
+                                <line x1="640" y1="392" x2="700" y2="392" stroke="#dc3545" stroke-width="2" marker-end="url(#arrR)"/>
+                                <line x1="640" y1="462" x2="700" y2="462" stroke="#dc3545" stroke-width="2" marker-end="url(#arrR)"/>
+                                <text x="706" y="318" font-size="13" fill="#212529">TD loss vs. target net</text>
+                                <text x="706" y="336" font-size="12" fill="#6c757d">(Double DQN target, MSE)</text>
+                                <text x="706" y="396" font-size="13" fill="#dc3545">cross-entropy</text>
+                                <text x="706" y="466" font-size="13" fill="#dc3545">cross-entropy</text>
+
+                                <rect x="706" y="406" width="236" height="40" rx="6" fill="#212529"/>
+                                <text x="824" y="431" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">L = L_DDQN + α · L_GS</text>
+
+                                <!-- legend -->
+                                <rect x="20" y="482" width="14" height="14" rx="3" fill="#fff5f5" stroke="#dc3545"/>
+                                <text x="42" y="494" font-size="12" fill="#495057">new in this project</text>
+                                <rect x="170" y="482" width="14" height="14" rx="3" fill="#e7f1ff" stroke="#6ea8fe"/>
+                                <text x="192" y="494" font-size="12" fill="#495057">shared network</text>
+                            </svg>
+                        </div>
+                        <figcaption>Training pipeline. Red parts are the two modifications. The baselines use the same pipeline without them: the raw reward, and only the Q-head. On narrow screens, scroll the diagram sideways.</figcaption>
+                    </figure>
+
+                    <h3 class="h5 fw-bold mt-4">Baselines: DDQN and Dueling DDQN</h3>
+                    <p><strong>Double DQN</strong> uses the online network to pick the best next action and a slowly updated target network to score it. This cuts the over-estimation of plain DQN:</p>
+                    <div class="eq mb-3">y = r + γ · Q<sub>target</sub>( s′, argmax<sub>a</sub> Q<sub>online</sub>(s′, a) )</div>
+                    <p><strong>Dueling DDQN</strong> splits the last layers into a state value V(s) and an advantage A(s, a), then joins them back into Q(s, a). Both agents use the same CNN body and the same settings, so the comparison is fair.</p>
+
+                    <h3 class="h5 fw-bold mt-4">Modification 1: a reward that separates "idle" from "dead"</h3>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <p>The default reward is 0 both when Ms. Pac-Man makes no progress and when she runs into a dangerous ghost and loses a life. Losing a life is far worse, so it should get a far stronger signal. I changed only those two rows:</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered mb-0">
+                                    <thead class="table-light"><tr><th>Game event</th><th class="text-end">Baseline</th><th class="text-end">Mod 1</th></tr></thead>
+                                    <tbody>
+                                        <tr class="table-danger"><td>No pellet eaten (stationary)</td><td class="text-end">0</td><td class="text-end fw-bold">&minus;1</td></tr>
+                                        <tr class="table-danger"><td>Hit a dangerous ghost (life lost)</td><td class="text-end">0</td><td class="text-end fw-bold">&minus;200</td></tr>
+                                        <tr><td>Pellet</td><td class="text-end">10</td><td class="text-end">10</td></tr>
+                                        <tr><td>Power pill</td><td class="text-end">50</td><td class="text-end">50</td></tr>
+                                        <tr><td>Fruit</td><td class="text-end">100</td><td class="text-end">100</td></tr>
+                                        <tr><td>Eat a scared ghost</td><td class="text-end">200</td><td class="text-end">200</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="h5 fw-bold mt-4">Modification 2: make the network predict the ghost state</h3>
+                    <p>A compact, ideal state would say where the pills are and whether the ghosts are scared. Pixels do not give that directly. So I keep the pixel input and add a second training task that forces the CNN to learn those features. Two small heads sit on the shared 512-unit feature layer:</p>
+                    <ul>
+                        <li><strong>Ghost state</strong> (2 classes): are the ghosts scared right now?</li>
+                        <li><strong>Power pills left</strong> (5 classes, 0 to 4): this ties closely to the ghost state, because a power pill makes the ghosts scared.</li>
+                    </ul>
+                    <p><strong>The labels cost nothing.</strong> They come from the reward stream during play. A reward of 50 means a power pill was eaten, so the pill count drops by one and the ghosts count as scared for the next 40 steps. No human labeling and no game internals are needed.</p>
+                    <div class="eq mb-2">L<sub>MOD</sub> = L<sub>DDQN</sub> + α · L<sub>GS</sub>, &nbsp;&nbsp; L<sub>GS</sub> = CE(ŷ<sub>pills</sub>, y<sub>pills</sub>) + CE(ŷ<sub>ghost</sub>, y<sub>ghost</sub>)</div>
+                    <p class="small text-muted">Cross-entropy uses label smoothing 0.2, because the labels from rewards are a little noisy. α = 0.5 for DDQN and α = 0.25 for Dueling DDQN.</p>
+
+                    <h3 class="h5 fw-bold mt-4">Training setup</h3>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <tbody>
+                                <tr><th class="table-light w-50">Episodes per agent</th><td>5,000</td></tr>
+                                <tr><th class="table-light">Batch size / learning rate</th><td>64 / 1e-4 (Adam)</td></tr>
+                                <tr><th class="table-light">Discount γ / target-net copy</th><td>0.99 / every 10,000 steps</td></tr>
+                                <tr><th class="table-light">Replay memory</th><td>50,000 transitions</td></tr>
+                                <tr><th class="table-light">Exploration ε</th><td>1.0 &rarr; 0.1 (decay 5e-6); 0.05 at evaluation</td></tr>
+                                <tr><th class="table-light">Hardware</th><td>One NVIDIA RTX 2080 (8 GB), PyTorch</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="results">
+                    <h2>Results</h2>
+                    <p>Each trained agent played 100 games with ε = 0.05. The table shows the mean raw score.</p>
+
+                    <div class="figure-box mb-3">
+                        <div class="legend mb-2"><span><i style="background:#868e96"></i>Baseline</span><span><i style="background:#f1aeb5"></i>Mod 1: reward</span><span><i style="background:#dc3545"></i>Mod 2: ghost-state task</span></div>
+                        <div class="bar-row"><div class="bar-label">DDQN · baseline</div><div class="bar-track"><div class="bar base" style="width:59.2%">1,869</div></div></div>
+                        <div class="bar-row"><div class="bar-label">DDQN · Mod 1</div><div class="bar-track"><div class="bar m1" style="width:91.0%">2,871</div></div></div>
+                        <div class="bar-row"><div class="bar-label">DDQN · Mod 2</div><div class="bar-track"><div class="bar m2" style="width:77.2%">2,438</div></div></div>
+                        <hr class="my-2">
+                        <div class="bar-row"><div class="bar-label">Dueling DDQN · baseline</div><div class="bar-track"><div class="bar base" style="width:77.0%">2,431</div></div></div>
+                        <div class="bar-row"><div class="bar-label">Dueling DDQN · Mod 1</div><div class="bar-track"><div class="bar m1" style="width:60.7%">1,916</div></div></div>
+                        <div class="bar-row"><div class="bar-label">Dueling DDQN · Mod 2</div><div class="bar-track"><div class="bar m2" style="width:100%">3,156</div></div></div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-results">
+                            <thead class="table-light"><tr><th>Algorithm</th><th class="text-center">α</th><th class="text-end">Mean score</th><th class="text-end">vs. its baseline</th></tr></thead>
+                            <tbody>
+                                <tr><td>DDQN (baseline)</td><td class="text-center">&ndash;</td><td class="text-end">1,869.2</td><td class="text-end">&ndash;</td></tr>
+                                <tr><td>DDQN + Mod 1 (reward)</td><td class="text-center">&ndash;</td><td class="text-end">2,871.2</td><td class="text-end delta-up">+53.6%</td></tr>
+                                <tr><td>DDQN + Mod 2 (ghost state)</td><td class="text-center">0.5</td><td class="text-end">2,437.5</td><td class="text-end delta-up">+30.4%</td></tr>
+                                <tr><td>Dueling DDQN (baseline)</td><td class="text-center">&ndash;</td><td class="text-end">2,431.4</td><td class="text-end">&ndash;</td></tr>
+                                <tr><td>Dueling DDQN + Mod 1 (reward)</td><td class="text-center">&ndash;</td><td class="text-end">1,916.2</td><td class="text-end delta-down">&minus;21.2%</td></tr>
+                                <tr class="table-danger"><td><strong>Dueling DDQN + Mod 2 (ghost state)</strong></td><td class="text-center">0.25</td><td class="text-end"><strong>3,155.9</strong></td><td class="text-end delta-up">+29.8%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row g-3 mt-1">
+                        <div class="col-12">
+                            <figure class="figure-box mb-0">
+                                <img src="/projects/ms-pacman-rl/img/curves-reward-modification.png" class="img-fluid" alt="Running average of the last 200 scores over 5,000 episodes. Left: DDQN with the reward change stays well above plain DDQN. Right: Dueling DDQN with and without the reward change track each other.">
+                                <figcaption><strong>Mod 1, training curves</strong> (running mean of the last 200 scores). The reward change lifts DDQN all through training. For Dueling DDQN the two curves stay close.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-12">
+                            <figure class="figure-box mb-0">
+                                <img src="/projects/ms-pacman-rl/img/curves-ghost-state.png" class="img-fluid" alt="Running average of the last 200 scores over 5,000 episodes. Left: DDQN with ghost-state estimation is above DDQN throughout. Right: Dueling DDQN with ghost-state estimation starts slower, passes the baseline around episode 2,700 and ends near 2,400 versus about 1,800.">
+                                <figcaption><strong>Mod 2, training curves.</strong> The ghost-state task helps both agents. Dueling DDQN starts slower, likely because the reward-derived labels are noisy early on. It passes its baseline near episode 2,700 and keeps a clear lead.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="takeaways">
+                    <h2>What I learned</h2>
+                    <ul>
+                        <li class="mb-2"><strong>The reward function is part of the model.</strong> Changing two reward values lifted DDQN by 53.6% with no other change. The same values hurt Dueling DDQN (&minus;21.2%), so reward shaping must be tuned for each algorithm.</li>
+                        <li class="mb-2"><strong>Auxiliary tasks shape the features.</strong> Asking the CNN to predict what matters (ghost mood, pills left) helped both algorithms. It costs almost nothing at run time: two tiny linear heads.</li>
+                        <li class="mb-2"><strong>Free labels are often already in the data.</strong> The reward stream was enough to build the auxiliary labels, with no human labels and no access to game memory.</li>
+                        <li><strong>What did not work.</strong> I also tried an autoencoder to compress frames into a small state. Good reconstructions needed a large code, so it saved little memory or compute and made training slower.</li>
+                    </ul>
+                </section>
+
+                <section id="code">
+                    <h2>Code</h2>
+                    <p>PyTorch code for all six agents is on GitHub. Trained weights are not included.</p>
+                    <pre class="bg-light border rounded p-3 small mb-3"><code>code/
+  DDQN/            network.py · ddqn.py · ddqn_mod2.py · run_ddqn.py · run_ddqn_mod2.py
+                   buffer.py · utils.py (Gym wrappers, reward change, free labels) · get_plots.py
+  Dueling DDQN/    the same files for Dueling DDQN
+  requirements.txt · README.md</code></pre>
+                    <pre class="bg-light border rounded p-3 small"><code>cd DDQN
+python run_ddqn.py --name_exp DDQN_baseline                 # baseline
+python run_ddqn.py --name_exp DDQN_Reward_Mod --reward_mod  # modification 1
+python run_ddqn_mod2.py --name_exp DDQN_Mod2 --alpha 0.5    # modification 2</code></pre>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a class="btn btn-outline-danger btn-sm" href="https://github.com/sabbiracoustic1006/sabbiracoustic1006.github.io/tree/main/projects/ms-pacman-rl/code" target="_blank"><i class="bi bi-code-slash"></i> Browse the code</a>
+                        <a class="btn btn-outline-secondary btn-sm" href="/projects/ms-pacman-rl/report.pdf" target="_blank"><i class="bi bi-file-earmark-pdf"></i> Read the full report</a>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <footer class="footer mt-auto py-3 bg-light border border-top" id="footer">
+            <script>
+                $(function() {
+                    $("#footer").load("/assets/html/footer.html");
+                });
+            </script>
+        </footer>
+
+    </body>
+</html>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Projects | Sabbir Ahmed</title>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -107,6 +109,37 @@
                                     <span class="badge bg-secondary">Named Entity Recognition</span>
                                     <span class="badge bg-success">Semi-supervised Learning</span>
                                     <span class="badge bg-info text-dark">Ensemble Methods</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-5 shadow">
+                    <div class="row g-0">
+                        <div class="col-md-4 project-image-container" style="background-color:#000;">
+                            <a href="/projects/ms-pacman-rl/"><img src="/projects/ms-pacman-rl/img/thumb.png" class="project-image" style="image-rendering:pixelated; max-height:260px;" alt="Ms. Pac-Man game screen"></a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title"><a href="/projects/ms-pacman-rl/" class="link-dark text-decoration-none">Teaching an Agent to Play Ms. Pac-Man from Pixels</a></h3>
+                                <h5 class="card-subtitle mb-2 text-muted">Deep Reinforcement Learning &middot; UC Riverside &middot; 2022</h5>
+                                <p class="card-text">Two changes that make DDQN and Dueling DDQN play Atari Ms. Pac-Man better from raw pixels:</p>
+                                <ul>
+                                    <li>Reward shaping: separate "no progress" (&minus;1) from "life lost" (&minus;200). This lifts DDQN by 53.6%</li>
+                                    <li>Self-supervised auxiliary task: the network also predicts whether the ghosts are scared and how many power pills are left, with labels taken for free from the reward stream</li>
+                                    <li>Results: the auxiliary task improves both algorithms (+30.4% and +29.8%). The best agent averages 3,156 points, 68.8% above the DDQN baseline</li>
+                                </ul>
+                                <div class="d-flex flex-wrap gap-2 mt-3">
+                                    <span class="badge bg-primary">Reinforcement Learning</span>
+                                    <span class="badge bg-secondary">DDQN / Dueling DDQN</span>
+                                    <span class="badge bg-success">Auxiliary Tasks</span>
+                                    <span class="badge bg-info text-dark">PyTorch</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 mt-3">
+                                    <a class="btn btn-danger btn-sm" href="/projects/ms-pacman-rl/">Read more</a>
+                                    <a class="btn btn-outline-danger btn-sm" href="https://github.com/sabbiracoustic1006/sabbiracoustic1006.github.io/tree/main/projects/ms-pacman-rl/code" target="_blank">Code</a>
+                                    <a class="btn btn-outline-secondary btn-sm" href="/projects/ms-pacman-rl/report.pdf" target="_blank">Report</a>
                                 </div>
                             </div>
                         </div>

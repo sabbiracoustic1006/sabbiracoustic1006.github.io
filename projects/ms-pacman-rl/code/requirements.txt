@@ -1,0 +1,9 @@
+# Versions used in the 2022 experiments
+gym==0.23.1
+ale-py==0.7.5
+AutoROM==0.4.2
+AutoROM.accept-rom-license==0.4.2
+torch==1.11.0
+numpy
+opencv-python==4.5.5.64
+matplotlib==3.5.2
