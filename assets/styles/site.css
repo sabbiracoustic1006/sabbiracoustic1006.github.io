@@ -1,0 +1,419 @@
+/* ==========================================================================
+   Sabbir Ahmed - site styles
+   One file. No build step. Works on GitHub Pages as it is.
+
+   How it is organised
+   1. Tokens      colours and fonts. Change the look here.
+   2. Shared      header and footer (every page, also the older Bootstrap pages)
+   3. Base        only for the new pages (<html class="sa">)
+   4. Home        hero, proof strip, sections
+   5. Lists       experience rows, papers, project cards, posts
+   6. Older pages small fixes so Bootstrap pages match the new look
+   ========================================================================== */
+
+/* 1. Tokens ---------------------------------------------------------------- */
+:root {
+  --sa-bg: #faf8f3;            /* warm paper */
+  --sa-surface: #ffffff;
+  --sa-ink: #15201e;           /* main text */
+  --sa-ink2: #3f4d4a;          /* second text */
+  --sa-muted: #6a7673;         /* small labels */
+  --sa-line: #e4dfd4;
+  --sa-accent: #0f766e;        /* teal */
+  --sa-accent-strong: #0b5a54;
+  --sa-accent-soft: #e2f0ed;
+  --sa-on-accent: #ffffff;
+
+  --sa-serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sa-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --sa-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Dark colours. Only the new pages switch; older Bootstrap pages stay light. */
+@media (prefers-color-scheme: dark) {
+  html.sa {
+    --sa-bg: #0d1413;
+    --sa-surface: #141d1c;
+    --sa-ink: #e8eeec;
+    --sa-ink2: #bcc8c5;
+    --sa-muted: #8b9a97;
+    --sa-line: #25312f;
+    --sa-accent: #56d3c2;
+    --sa-accent-strong: #86e3d6;
+    --sa-accent-soft: #12302c;
+    --sa-on-accent: #05211d;
+  }
+}
+
+/* 2. Shared: header and footer ---------------------------------------------- */
+.sa-wrap {
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 40px);
+}
+
+.sa-skip {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--sa-ink);
+  color: var(--sa-bg);
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 10;
+}
+.sa-skip:focus { left: 12px; }
+
+.sa-header {
+  background: var(--sa-bg);
+  border-bottom: 1px solid var(--sa-line);
+  font-family: var(--sa-sans);
+}
+.sa-header .sa-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-block: 16px;
+}
+.sa-header .sa-brand {
+  font-family: var(--sa-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--sa-ink);
+  text-decoration: none;
+}
+.sa-header .sa-brand:hover { color: var(--sa-accent); }
+.sa-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 24px;
+  font-size: 0.95rem;
+}
+.sa-header .sa-nav a {
+  color: var(--sa-ink2);
+  text-decoration: none;
+  padding: 6px 0 4px;
+  border-bottom: 2px solid transparent;
+}
+.sa-header .sa-nav a:hover { color: var(--sa-ink); border-bottom-color: var(--sa-line); }
+.sa-header .sa-nav a[aria-current="page"] { color: var(--sa-ink); border-bottom-color: var(--sa-accent); }
+
+.sa-footer {
+  font: 400 0.86rem/1.6 var(--sa-sans);
+  color: var(--sa-muted);
+  padding-block: 28px 48px;
+}
+.sa-footer .sa-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.sa-footer .sa-wrap a { color: var(--sa-ink2); text-decoration: none; margin-left: 18px; }
+.sa-footer .sa-wrap a:first-child { margin-left: 0; }
+.sa-footer .sa-wrap a:hover { color: var(--sa-accent); }
+
+/* 3. Base (new pages only) --------------------------------------------------- */
+html.sa {
+  background: var(--sa-bg);
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+}
+html.sa *, html.sa *::before, html.sa *::after { box-sizing: border-box; }
+html.sa body {
+  margin: 0;
+  background: var(--sa-bg);
+  color: var(--sa-ink);
+  font: 400 17px/1.65 var(--sa-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+html.sa img { max-width: 100%; height: auto; display: block; }
+html.sa h1, html.sa h2, html.sa h3 {
+  font-family: var(--sa-serif);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+html.sa p { margin: 0 0 1em; }
+html.sa a { color: var(--sa-accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+html.sa a:hover { color: var(--sa-accent-strong); }
+html.sa :focus-visible { outline: 2px solid var(--sa-accent); outline-offset: 3px; border-radius: 4px; }
+html.sa ::selection { background: var(--sa-accent-soft); }
+
+.eyebrow {
+  font: 500 0.76rem/1.4 var(--sa-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sa-accent);
+  margin: 0 0 18px;
+}
+.when {
+  font: 400 0.8rem/1.4 var(--sa-mono);
+  color: var(--sa-muted);
+  white-space: nowrap;
+}
+.more { margin: 22px 0 0; font-size: 0.95rem; }
+.note { margin: 18px 0 0; font-size: 0.92rem; color: var(--sa-muted); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 0.95rem/1 var(--sa-sans);
+  padding: 13px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--sa-ink);
+  color: var(--sa-ink);
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+html.sa a.btn { color: var(--sa-ink); }
+html.sa a.btn:hover { border-color: var(--sa-accent); color: var(--sa-accent); }
+html.sa a.btn-primary { background: var(--sa-ink); color: var(--sa-bg); }
+html.sa a.btn-primary:hover { background: var(--sa-accent); border-color: var(--sa-accent); color: var(--sa-on-accent); }
+
+/* 4. Home -------------------------------------------------------------------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 232px;
+  gap: clamp(28px, 6vw, 72px);
+  align-items: center;
+  padding-block: clamp(40px, 7vw, 88px) clamp(32px, 5vw, 56px);
+}
+.hero h1 {
+  font-size: clamp(2.7rem, 6.4vw, 4.2rem);
+  letter-spacing: -0.028em;
+}
+.lede {
+  font: 400 clamp(1.25rem, 2.3vw, 1.5rem)/1.4 var(--sa-serif);
+  color: var(--sa-ink);
+  max-width: 29em;
+  margin: 18px 0 14px;
+}
+.hero .now {
+  color: var(--sa-ink2);
+  max-width: 35em;
+  margin-bottom: 28px;
+}
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+.links a { text-decoration: none; }
+.links a:hover { text-decoration: underline; }
+
+.portrait { position: relative; margin: 0 14px 14px 0; }
+.portrait img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 28%;
+  border-radius: 16px;
+}
+.portrait::before {            /* thin teal frame, shifted down and right */
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border: 1.5px solid var(--sa-accent);
+  border-radius: 16px;
+}
+
+/* Proof strip: four facts in one line */
+.proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block: 1px solid var(--sa-line);
+}
+.proof li { padding: 24px 20px 22px; border-left: 1px solid var(--sa-line); }
+.proof li:first-child { border-left: 0; padding-left: 0; }
+.proof b {
+  display: block;
+  font: 500 clamp(1.5rem, 2.7vw, 2.05rem)/1.1 var(--sa-serif);
+  letter-spacing: -0.015em;
+}
+.proof span {
+  display: block;
+  margin-top: 9px;
+  font: 400 0.78rem/1.5 var(--sa-mono);
+  color: var(--sa-muted);
+}
+
+/* A section = small label on the left, content on the right */
+.section {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+  padding-block: clamp(36px, 5vw, 56px);
+  border-bottom: 1px solid var(--sa-line);
+}
+.section:last-of-type { border-bottom: 0; }
+html.sa .section > h2 {
+  font: 500 0.76rem/1.4 var(--sa-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sa-muted);
+  padding-top: 5px;
+}
+.section > h2::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--sa-accent);
+  margin-bottom: 14px;
+}
+
+/* Sub pages */
+.page-head { padding-block: clamp(36px, 6vw, 68px) clamp(20px, 3vw, 32px); border-bottom: 1px solid var(--sa-line); }
+.page-head h1 { font-size: clamp(2.2rem, 5vw, 3.1rem); letter-spacing: -0.022em; }
+.page-head p { color: var(--sa-ink2); font-size: 1.08rem; max-width: 36em; margin: 14px 0 0; }
+.page-body { padding-block: clamp(28px, 4vw, 44px) clamp(40px, 6vw, 72px); }
+.year {
+  font: 500 0.76rem/1.4 var(--sa-mono);
+  letter-spacing: 0.14em;
+  color: var(--sa-muted);
+  margin: 44px 0 16px;
+}
+html.sa h2.year { font: 500 0.76rem/1.4 var(--sa-mono); letter-spacing: 0.14em; margin: 44px 0 16px; }
+html.sa h2.year:first-child { margin-top: 0; }
+
+/* 5. Lists ------------------------------------------------------------------- */
+.rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+.row-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 2px 16px; }
+html.sa .row h3 { font: 500 1.22rem/1.3 var(--sa-serif); }
+.row .org { color: var(--sa-ink2); font-weight: 400; }
+.row p { margin: 6px 0 0; color: var(--sa-ink2); max-width: 40em; }
+
+.papers { list-style: none; margin: 0; padding: 0; }
+.paper { padding: 22px 0; border-top: 1px solid var(--sa-line); }
+.paper:first-child { border-top: 0; padding-top: 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.tag {
+  font: 500 0.7rem/1 var(--sa-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 6px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--sa-line);
+  background: var(--sa-surface);
+  color: var(--sa-ink2);
+}
+.tag-award { background: var(--sa-accent); border-color: var(--sa-accent); color: var(--sa-on-accent); }
+html.sa .paper h3 { font: 500 1.2rem/1.32 var(--sa-serif); }
+html.sa .paper h3 a { color: inherit; text-decoration: none; }
+html.sa .paper h3 a:hover { color: var(--sa-accent); text-decoration: underline; }
+.paper .sum { margin: 7px 0 0; color: var(--sa-ink2); max-width: 40em; }
+.paper .authors { margin: 7px 0 0; font-size: 0.92rem; color: var(--sa-muted); }
+.paper .authors b { color: var(--sa-ink); font-weight: 600; }
+.paper .venue { margin: 4px 0 0; font-size: 0.92rem; color: var(--sa-ink2); font-style: italic; }
+.plinks { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 9px 0 0; font-size: 0.9rem; }
+
+/* Papers with a small figure (Publications page) */
+.paper.has-thumb { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 24px; align-items: start; }
+.thumb {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  padding: 6px;
+  border: 1px solid var(--sa-line);
+  border-radius: 10px;
+  background: #ffffff;        /* figures have a white background */
+}
+.thumb img { max-height: 100%; width: auto; object-fit: contain; }
+.thumb.tile {
+  background: var(--sa-accent-soft);
+  border-color: transparent;
+  color: var(--sa-accent-strong);
+  font: 500 0.95rem/1.2 var(--sa-mono);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  background: var(--sa-surface);
+  border: 1px solid var(--sa-line);
+  border-radius: 14px;
+}
+.card .metric { font: 500 2rem/1.05 var(--sa-serif); letter-spacing: -0.02em; color: var(--sa-accent); margin: 0; }
+.card .metric small { font: 400 0.76rem/1.3 var(--sa-mono); letter-spacing: 0; color: var(--sa-muted); margin-left: 6px; }
+html.sa .card h3 { font: 500 1.16rem/1.3 var(--sa-serif); margin-top: 4px; }
+html.sa .card h3 a { color: inherit; text-decoration: none; }
+html.sa .card h3 a:hover { color: var(--sa-accent); text-decoration: underline; }
+.card p { margin: 0; color: var(--sa-ink2); font-size: 0.96rem; }
+.card ul { margin: 2px 0 0; padding-left: 1.1em; color: var(--sa-ink2); font-size: 0.96rem; }
+.card li { margin-bottom: 4px; }
+.card .plinks { margin-top: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 0; padding: 12px 0 0; list-style: none; }
+.card .chips { padding-left: 0; }
+.chip {
+  font: 400 0.72rem/1 var(--sa-mono);
+  color: var(--sa-muted);
+  border: 1px solid var(--sa-line);
+  border-radius: 999px;
+  padding: 5px 10px;
+  margin: 0;
+}
+.cards.wide { grid-template-columns: 1fr; }
+
+.contact-line { font: 400 clamp(1.25rem, 2.3vw, 1.5rem)/1.4 var(--sa-serif); margin: 0 0 20px; max-width: 26em; }
+
+/* Soft entrance, once. Off for people who ask for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: sa-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .rise-2 { animation-delay: 0.08s; }
+  .rise-3 { animation-delay: 0.16s; }
+  @keyframes sa-rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* Phones */
+@media (max-width: 720px) {
+  html.sa body { font-size: 16px; }
+  .sa-nav { gap: 2px 18px; font-size: 0.92rem; }
+  .hero { grid-template-columns: 1fr; gap: 26px; }
+  .portrait { order: -1; width: 116px; margin: 0 8px 8px 0; }
+  .portrait img, .portrait::before { border-radius: 14px; }
+  .portrait::before { inset: 8px -8px -8px 8px; }
+  .proof { grid-template-columns: 1fr 1fr; }
+  .proof li { padding: 18px 14px; }
+  .proof li:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .proof li:nth-child(n + 3) { border-top: 1px solid var(--sa-line); }
+  .section { grid-template-columns: 1fr; gap: 20px; }
+  .cards { grid-template-columns: 1fr; }
+  .paper.has-thumb { grid-template-columns: 84px minmax(0, 1fr); gap: 16px; }
+  .thumb.tile { font-size: 0.68rem; }
+  .sa-footer .sa-wrap a { margin-left: 0; margin-right: 18px; }
+}
+
+/* 6. Older Bootstrap pages (blog posts, Ms. Pac-Man page) --------------------- */
+body.sa-legacy { font-family: var(--sa-sans); background: var(--sa-bg); }
+body.sa-legacy h1, body.sa-legacy h2, body.sa-legacy h3 { font-family: var(--sa-serif); font-weight: 500; letter-spacing: -0.01em; }
+body.sa-legacy .sa-wrap { max-width: 1000px; padding-inline: 12px; }
+body.sa-legacy #header, body.sa-legacy #footer { background: var(--sa-bg) !important; border: 0 !important; padding: 0 !important; }
+body.sa-legacy #footer { border-top: 1px solid var(--sa-line) !important; }

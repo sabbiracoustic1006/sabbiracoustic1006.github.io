@@ -1,86 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border border-bottom">
-    <div class="container" style="max-width: 1000px">
-      <a class="navbar-brand link-dark" href="/" id="name-link">Sabbir Ahmed</a>
-      <button class="navbar-toggler toggler-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse align-left" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="/" id="home-link">
-                <i class="bi bi-house"></i>
-                Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="/projects/" id="projects-link">
-                <i class="bi-speedometer"></i>
-                Projects
-            </a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link mx-2" href="/students/" id="students-link">
-                <i class="bi-person-square"></i>
-                Students
-            </a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="/publications/" id="publications-link">
-                <i class="bi-stack"></i>
-                Publications
-            </a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link mx-2" href="/teaching/" id="teaching-link">
-                <i class="fa fa-mortar-board"></i>
-                Teaching
-            </a>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link mx-2" aria-current="page" href="/service/" id="service-link">
-                <i class="bi-upc-scan"></i>
-                Service
-            </a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="/blogs/" id="blogs-link">
-                <i class="bi bi-journal-text"></i>
-                Blogs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link mx-2" href="mailto:sahmed9@binghamton.edu" id="contact-link">
-                <i class="fa fa-envelope" ></i>
-                Contact
-            </a>
-          </li>
-        </ul>
-      </div>
+<!-- Header for the older Bootstrap pages (blog posts, Ms. Pac-Man page).
+     Those pages load this file with jQuery. The new pages have the same header written in place. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+<link rel="stylesheet" href="/assets/styles/site.css">
+
+<div class="sa-header">
+    <div class="sa-wrap">
+        <a class="sa-brand" href="/">Sabbir Ahmed</a>
+        <nav class="sa-nav" aria-label="Main">
+            <a href="/publications/" id="sa-nav-research">Research</a>
+            <a href="/projects/" id="sa-nav-projects">Projects</a>
+            <a href="/blogs/" id="sa-nav-writing">Writing</a>
+            <a href="/assets/cv/Sabbir_CV.pdf">CV</a>
+            <a href="mailto:sahmed9@binghamton.edu">Contact</a>
+        </nav>
     </div>
-</nav>
+</div>
 
 <script>
-    function getCurrentURL () {
-        return window.location.href
-    }
-    const url = getCurrentURL();
+    // Mark the page as an older page, so site.css can match its fonts and colours.
+    document.body.classList.add('sa-legacy');
 
-    if(url.includes("/projects/")) {
-        $("#projects-link").addClass('active');
-    } else if(url.includes("/students/")) {
-        $("#students-link").addClass('active');
-    } else if(url.includes("/publications/")) {
-        $("#publications-link").addClass('active');
-    } else if(url.includes("/teaching/")) {
-        $("#teaching-link").addClass('active');
-    } else if(url.includes("/service/")) {
-        $("#service-link").addClass('active');
-    } else if(url.includes("/blogs/")) {
-        $("#blogs-link").addClass('active');
-    } else if(url.includes("/policies/")) { 
-        // do nothin'
-    } else {
-        $("#home-link").addClass('active');
-        $("#name-link").addClass('d-none');
+    // Underline the menu item of the section we are in.
+    var saPath = window.location.pathname;
+    var saActive = null;
+    if (saPath.indexOf('/projects/') === 0) { saActive = 'sa-nav-projects'; }
+    if (saPath.indexOf('/blogs/') === 0) { saActive = 'sa-nav-writing'; }
+    if (saPath.indexOf('/publications/') === 0) { saActive = 'sa-nav-research'; }
+    if (saActive) { document.getElementById(saActive).setAttribute('aria-current', 'page'); }
+
+    // Small icon in the browser tab.
+    if (!document.querySelector('link[rel="icon"]')) {
+        var saIcon = document.createElement('link');
+        saIcon.rel = 'icon';
+        saIcon.type = 'image/svg+xml';
+        saIcon.href = '/favicon.svg';
+        document.head.appendChild(saIcon);
     }
 </script>

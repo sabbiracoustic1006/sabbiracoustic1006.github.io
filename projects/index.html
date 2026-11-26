@@ -1,160 +1,114 @@
 <!DOCTYPE html>
-<html class="h-100">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Projects | Sabbir Ahmed</title>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link rel="stylesheet" href="/assets/styles/font-awesome-4.7.0/css/font-awesome.css">
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-        <style>
-            .project-image-container {
-                height: 100%;
-                min-height: 280px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                border-radius: 4px 0 0 4px;
-                padding: 10px;
-                background-color: #f8f9fa;
-            }
-            
-            .project-image {
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: scale-down;
-            }
-            
-            @media (max-width: 767.98px) {
-                .project-image-container {
-                    min-height: 300px;
-                    border-radius: 4px 4px 0 0;
-                }
-            }
+<html lang="en" class="sa">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projects and Competitions | Sabbir Ahmed</title>
+    <meta name="description" content="Machine learning projects by Sabbir Ahmed: three top-3 finishes in the eBay ML Challenge, LLM fine-tuning, named entity recognition and deep reinforcement learning.">
+    <link rel="canonical" href="https://sabbiracoustic1006.github.io/projects/">
+    <meta property="og:title" content="Projects and Competitions | Sabbir Ahmed">
+    <meta property="og:description" content="eBay ML Challenge top 3 in three years, LLM fine-tuning, NER and deep reinforcement learning.">
+    <meta property="og:image" content="https://sabbiracoustic1006.github.io/assets/img_misc/share-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+    <link rel="stylesheet" href="/assets/styles/site.css">
+</head>
 
-            /* Larger screens */
-            @media (min-width: 992px) {
-                .project-image-container {
-                    min-height: 320px;
-                }
-            }
-        </style>
-    </head>
-    <body class="d-flex flex-column h-100">
+<body>
+<a class="sa-skip" href="#main">Skip to content</a>
 
-        <header id="header">
-            <script>
-                $(function() {
-                    $("#header").load("/assets/html/header.html");
-                });
-            </script>
-        </header>
+<header class="sa-header">
+    <div class="sa-wrap">
+        <a class="sa-brand" href="/">Sabbir Ahmed</a>
+        <nav class="sa-nav" aria-label="Main">
+            <a href="/publications/">Research</a>
+            <a href="/projects/" aria-current="page">Projects</a>
+            <a href="/blogs/">Writing</a>
+            <a href="/assets/cv/Sabbir_CV.pdf">CV</a>
+            <a href="mailto:sahmed9@binghamton.edu">Contact</a>
+        </nav>
+    </div>
+</header>
 
-        <main class="flex-shrink-1 mb-5">
-            <div class="container pt-4" style="max-width:1000px;">
-                <h1>Projects</h1>
-                <p class="lead">Recent machine learning and natural language processing projects</p>
-                <hr>
-                
-                <div class="card mb-5 shadow">
-                    <div class="row g-0">
-                        <div class="col-md-4 project-image-container">
-                            <img src="/assets/img_projects/ebay2024.png" class="project-image" alt="eBay 2024 Competition">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3 class="card-title">eBay 2024 University ML Competition</h3>
-                                <h5 class="card-subtitle mb-2 text-muted">Vehicle Parts Compatibility Extraction - 2nd Runner-up</h5>
-                                <p class="card-text">Developed a machine learning solution to extract vehicle parts compatibility (fitment) data from eBay listings:</p>
-                                <ul>
-                                    <li>Data Preparation: Converted raw HTML data to text and cleaned text using Qwen2.5-32B-Instruct for noise reduction and irrelevant information removal</li>
-                                    <li>Model Development: Fine-tuned (k-fold) two open-source LLMs (Mistral-Nemo and Qwen2.5-14B) using LoRA on labeled training data</li>
-                                    <li>Ensemble Approach: Implemented majority voting strategy to combine predictions from k-fold models</li>
-                                    <li>Results: Achieved 79.6% F0.2 score, securing second runner-up position in the competition</li>
-                                </ul>
-                                <div class="d-flex flex-wrap gap-2 mt-4">
-                                    <span class="badge bg-primary">LLMs</span>
-                                    <span class="badge bg-secondary">Information Extraction</span>
-                                    <span class="badge bg-success">LoRA Fine-tuning</span>
-                                    <span class="badge bg-info text-dark">Model Ensemble</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card mb-5 shadow">
-                    <div class="row g-0">
-                        <div class="col-md-4 project-image-container">
-                            <img src="/assets/img_projects/ebay2023.png" class="project-image" alt="eBay 2023 Competition">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3 class="card-title">eBay 2023 University ML Competition</h3>
-                                <h5 class="card-subtitle mb-2 text-muted">Named Entity Recognition - 2nd Runner-up</h5>
-                                <p class="card-text">Built a model to extract and label named entities from eBay item titles:</p>
-                                <ul>
-                                    <li>Teacher-Student Framework: Implemented a teacher-student training approach with XLM-ROBERTA and ELECTRA models</li>
-                                    <li>Semi-supervised Learning: Generated pseudo labels on unlabeled data using the teacher model while filtering uncertain samples</li>
-                                    <li>Advanced Training: Used k-fold training and ensemble strategies to combine predictions from the k-fold models</li>
-                                    <li>Results: Achieved an F1 score of 94.37%, securing second runner-up position in the challenge</li>
-                                </ul>
-                                <div class="d-flex flex-wrap gap-2 mt-4">
-                                    <span class="badge bg-primary">NLP</span>
-                                    <span class="badge bg-secondary">Named Entity Recognition</span>
-                                    <span class="badge bg-success">Semi-supervised Learning</span>
-                                    <span class="badge bg-info text-dark">Ensemble Methods</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<main id="main" class="sa-wrap">
 
-                <div class="card mb-5 shadow">
-                    <div class="row g-0">
-                        <div class="col-md-4 project-image-container" style="background-color:#000;">
-                            <a href="/projects/ms-pacman-rl/"><img src="/projects/ms-pacman-rl/img/thumb.png" class="project-image" style="image-rendering:pixelated; max-height:260px;" alt="Ms. Pac-Man game screen"></a>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3 class="card-title"><a href="/projects/ms-pacman-rl/" class="link-dark text-decoration-none">Teaching an Agent to Play Ms. Pac-Man from Pixels</a></h3>
-                                <h5 class="card-subtitle mb-2 text-muted">Deep Reinforcement Learning &middot; UC Riverside &middot; 2022</h5>
-                                <p class="card-text">Two changes that make DDQN and Dueling DDQN play Atari Ms. Pac-Man better from raw pixels:</p>
-                                <ul>
-                                    <li>Reward shaping: separate "no progress" (&minus;1) from "life lost" (&minus;200). This lifts DDQN by 53.6%</li>
-                                    <li>Self-supervised auxiliary task: the network also predicts whether the ghosts are scared and how many power pills are left, with labels taken for free from the reward stream</li>
-                                    <li>Results: the auxiliary task improves both algorithms (+30.4% and +29.8%). The best agent averages 3,156 points, 68.8% above the DDQN baseline</li>
-                                </ul>
-                                <div class="d-flex flex-wrap gap-2 mt-3">
-                                    <span class="badge bg-primary">Reinforcement Learning</span>
-                                    <span class="badge bg-secondary">DDQN / Dueling DDQN</span>
-                                    <span class="badge bg-success">Auxiliary Tasks</span>
-                                    <span class="badge bg-info text-dark">PyTorch</span>
-                                </div>
-                                <div class="d-flex flex-wrap gap-2 mt-3">
-                                    <a class="btn btn-danger btn-sm" href="/projects/ms-pacman-rl/">Read more</a>
-                                    <a class="btn btn-outline-danger btn-sm" href="https://github.com/sabbiracoustic1006/sabbiracoustic1006.github.io/tree/main/projects/ms-pacman-rl/code" target="_blank">Code</a>
-                                    <a class="btn btn-outline-secondary btn-sm" href="/projects/ms-pacman-rl/report.pdf" target="_blank">Report</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+    <div class="page-head">
+        <p class="eyebrow">Projects</p>
+        <h1>Projects and competitions</h1>
+        <p>Applied machine learning work outside my papers. Each one starts with the result.</p>
+    </div>
 
-        <footer class="footer mt-auto py-3 bg-light border border-top" id="footer">
-            <script>
-                $(function() {
-                    $("#footer").load("/assets/html/footer.html");
-                });
-            </script>
-        </footer>
-        
-    </body>
+    <div class="page-body">
+        <div class="cards wide">
+
+            <article class="card">
+                <p class="metric">1st runner-up</p>
+                <h3>eBay ML Challenge 2025</h3>
+                <p>Sequence tagging on eBay listings. This was our third year in a row in the top 3.</p>
+                <ul class="chips"><li class="chip">NLP</li><li class="chip">Named entity recognition</li></ul>
+            </article>
+
+            <article class="card">
+                <p class="metric">79.6%<small>F0.2 &middot; 2nd runner-up</small></p>
+                <h3>eBay ML Challenge 2024: vehicle parts compatibility</h3>
+                <p>A solution that extracts vehicle parts compatibility (fitment) data from eBay listings.</p>
+                <ul>
+                    <li><strong>Data preparation.</strong> Converted raw HTML to text, then cleaned the text with Qwen2.5-32B-Instruct to remove noise and irrelevant information.</li>
+                    <li><strong>Model development.</strong> Fine-tuned two open-source LLMs (Mistral-Nemo and Qwen2.5-14B) with LoRA and k-fold training on the labeled data.</li>
+                    <li><strong>Ensemble.</strong> A majority vote combines the predictions of the k-fold models.</li>
+                </ul>
+                <p class="plinks"><a href="/blogs/fine-tuning-llms.html">Read the write-up &rarr;</a></p>
+                <ul class="chips"><li class="chip">LLMs</li><li class="chip">Information extraction</li><li class="chip">LoRA fine-tuning</li><li class="chip">Model ensemble</li></ul>
+            </article>
+
+            <article class="card">
+                <p class="metric">94.37%<small>F1 &middot; 2nd runner-up</small></p>
+                <h3>eBay ML Challenge 2023: named entity recognition</h3>
+                <p>A model that extracts and labels named entities in eBay item titles.</p>
+                <ul>
+                    <li><strong>Teacher and student.</strong> A teacher-student training approach with XLM-RoBERTa and ELECTRA models.</li>
+                    <li><strong>Semi-supervised learning.</strong> The teacher makes pseudo labels on unlabeled data, and uncertain samples are filtered out.</li>
+                    <li><strong>Training.</strong> K-fold training and an ensemble combine the predictions of the k-fold models.</li>
+                </ul>
+                <ul class="chips"><li class="chip">NLP</li><li class="chip">Named entity recognition</li><li class="chip">Semi-supervised learning</li><li class="chip">Ensemble methods</li></ul>
+            </article>
+
+            <article class="card">
+                <p class="metric">+68.8%<small>over the DDQN baseline</small></p>
+                <h3><a href="/projects/ms-pacman-rl/">Teaching an agent to play Ms. Pac-Man from pixels</a></h3>
+                <p>Deep reinforcement learning &middot; UC Riverside &middot; 2022. Two changes make DDQN and Dueling DDQN play Atari Ms. Pac-Man better from raw pixels.</p>
+                <ul>
+                    <li><strong>Reward shaping.</strong> Separate &ldquo;no progress&rdquo; (&minus;1) from &ldquo;life lost&rdquo; (&minus;200). This lifts DDQN by 53.6%.</li>
+                    <li><strong>Self-supervised helper task.</strong> The network also predicts whether the ghosts are scared and how many power pills are left. The labels come for free from the reward stream.</li>
+                    <li><strong>Result.</strong> The helper task improves both algorithms (+30.4% and +29.8%). The best agent averages 3,156 points.</li>
+                </ul>
+                <p class="plinks">
+                    <a href="/projects/ms-pacman-rl/">Read more &rarr;</a>
+                    <a href="https://github.com/sabbiracoustic1006/sabbiracoustic1006.github.io/tree/main/projects/ms-pacman-rl/code" target="_blank" rel="noopener">Code &nearr;</a>
+                    <a href="/projects/ms-pacman-rl/report.pdf" target="_blank">Report (PDF)</a>
+                </p>
+                <ul class="chips"><li class="chip">Reinforcement learning</li><li class="chip">DDQN / Dueling DDQN</li><li class="chip">Auxiliary tasks</li><li class="chip">PyTorch</li></ul>
+            </article>
+
+        </div>
+        <p class="note">Also: Kaggle Expert, top 2% in APTOS 2019, and 6th in the IEEE Signal Processing Cup 2019.</p>
+    </div>
+
+</main>
+
+<footer class="sa-footer">
+    <div class="sa-wrap">
+        <span>&copy; 2026 Sabbir Ahmed. Last updated November 2026.</span>
+        <span>
+            <a href="https://scholar.google.com/citations?user=TVcMzOAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+            <a href="https://github.com/sabbiracoustic1006" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/sabbirahmed1006/" target="_blank" rel="noopener">LinkedIn</a>
+        </span>
+    </div>
+</footer>
+
+</body>
 </html>

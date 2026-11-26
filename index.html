@@ -1,173 +1,292 @@
 <!DOCTYPE html>
-<html class="h-100">
-    <head>
-        <title>About | Sabbir Ahmed</title>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link rel="stylesheet" href="/assets/styles/font-awesome-4.7.0/css/font-awesome.css">
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    </head>
+<html lang="en" class="sa">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sabbir Ahmed | Secure and Efficient Machine Learning</title>
+    <meta name="description" content="Sabbir Ahmed is a Software Engineer at Uber working on LLM agents and machine learning for security. PhD in Computer Science. First-author papers at CVPR, ICCV and WACV on secure and efficient deep learning.">
+    <meta name="author" content="Sabbir Ahmed">
+    <link rel="canonical" href="https://sabbiracoustic1006.github.io/">
 
-    <body class="d-flex flex-column h-100">
-    
-    <header id="header">
-        <script>
-            $(function() {
-                $("#header").load("/assets/html/header.html");
-            });
-            </script>
-    </header>
-            
-    <main class="flex-shrink-1">
-        <div class="container" style="max-width:1000px;">
-            <div class="row">
-                <div class="col-md-2 col-sm-3 col-xs-3 mt-4">
-                    <img class="rounded shadow img-fluid" src="/assets/img_people/pro_pic.jpg" data-holder-rendered="true">
-                </div>
-                <div class="col-md-10 col-sm-9 col-xs-6 mt-2 pt-3">
-                    <h1>Sabbir Ahmed</h1>
-                    <p class="lead">
-                        Third Year PhD Student in Computer Science<br>
-                        School of Computing<br>
-                        State University of New York at Binghamton<br>
-                    </p>
-                </div>
+    <!-- Preview card for LinkedIn, X, Slack and iMessage -->
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Sabbir Ahmed">
+    <meta property="og:title" content="Sabbir Ahmed | Secure and Efficient Machine Learning">
+    <meta property="og:description" content="Software Engineer at Uber. PhD in Computer Science. Papers at CVPR, ICCV and WACV on secure and efficient deep learning.">
+    <meta property="og:url" content="https://sabbiracoustic1006.github.io/">
+    <meta property="og:image" content="https://sabbiracoustic1006.github.io/assets/img_misc/share-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+    <link rel="stylesheet" href="/assets/styles/site.css">
+
+    <!-- Tells Google who this page is about -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sabbir Ahmed",
+      "url": "https://sabbiracoustic1006.github.io/",
+      "image": "https://sabbiracoustic1006.github.io/assets/img_people/sabbir.jpg",
+      "jobTitle": "Software Engineer",
+      "worksFor": { "@type": "Organization", "name": "Uber" },
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "State University of New York at Binghamton" },
+        { "@type": "CollegeOrUniversity", "name": "University of California, Riverside" },
+        { "@type": "CollegeOrUniversity", "name": "Bangladesh University of Engineering and Technology" }
+      ],
+      "knowsAbout": ["Machine learning", "AI security", "Model compression", "Vision Transformers", "Large language models"],
+      "sameAs": [
+        "https://scholar.google.com/citations?user=TVcMzOAAAAAJ&hl=en",
+        "https://www.linkedin.com/in/sabbirahmed1006/",
+        "https://github.com/sabbiracoustic1006",
+        "https://x.com/Sahmed9Ahmed"
+      ]
+    }
+    </script>
+</head>
+
+<body>
+<a class="sa-skip" href="#main">Skip to content</a>
+
+<header class="sa-header">
+    <div class="sa-wrap">
+        <a class="sa-brand" href="/" aria-current="page">Sabbir Ahmed</a>
+        <nav class="sa-nav" aria-label="Main">
+            <a href="/publications/">Research</a>
+            <a href="/projects/">Projects</a>
+            <a href="/blogs/">Writing</a>
+            <a href="/assets/cv/Sabbir_CV.pdf">CV</a>
+            <a href="mailto:sahmed9@binghamton.edu">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main id="main" class="sa-wrap">
+
+    <!-- 1. Who I am, in one screen ------------------------------------------- -->
+    <section class="hero" aria-label="Introduction">
+        <div class="rise">
+            <p class="eyebrow">Applied ML &middot; AI security &middot; Efficient deep learning</p>
+            <h1>Sabbir Ahmed</h1>
+            <p class="lede">I build machine learning systems that are secure and efficient, from compressed Vision Transformers to LLM agents for security.</p>
+            <p class="now">Software Engineer at Uber, in Core Security Engineering. PhD in Computer Science from SUNY Binghamton (2026), with papers at CVPR, ICCV, WACV and DATE.</p>
+            <div class="actions">
+                <a class="btn btn-primary" href="/assets/cv/Sabbir_CV.pdf">Download CV</a>
+                <a class="btn" href="mailto:sahmed9@binghamton.edu">Email me</a>
             </div>
-            <hr>
-
-            <h2>Quick Links</h2>
-            <ul>
-                <!-- <li><a href="/research/" class="link-danger">For researchers and businesses interested in collaborating, see the Research page.</a></li>
-                <li><a href="/policies/" class="link-danger">Are you a student interested in Vis research? Read the Lab Policies page first!</a></li> -->
-                <li><a href="/assets/cv/Sabbir_CV.pdf" target="_blank" class="link-danger">CV</a> (last updated March 2025)</li>
+            <ul class="links">
+                <li><a href="https://www.linkedin.com/in/sabbirahmed1006/" target="_blank" rel="noopener">LinkedIn &nearr;</a></li>
+                <li><a href="https://scholar.google.com/citations?user=TVcMzOAAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar &nearr;</a></li>
+                <li><a href="https://github.com/sabbiracoustic1006" target="_blank" rel="noopener">GitHub &nearr;</a></li>
+                <li><a href="https://x.com/Sahmed9Ahmed" target="_blank" rel="noopener">X &nearr;</a></li>
             </ul>
+        </div>
+        <figure class="portrait rise rise-2">
+            <img src="/assets/img_people/sabbir.jpg" width="800" height="1088" alt="Portrait of Sabbir Ahmed">
+        </figure>
+    </section>
 
-            <h2>About</h2>
+    <!-- 2. Proof, as four facts ------------------------------------------------ -->
+    <ul class="proof rise rise-3" aria-label="Highlights">
+        <li><b>5 papers</b><span>at CVPR and ICCV, 4 as first author</span></li>
+        <li><b>Best Paper</b><span>DATE 2026, first author</span></li>
+        <li><b>Oral</b><span>WACV 2026, first author</span></li>
+        <li><b>Top 3</b><span>eBay ML Challenge, 3 years in a row</span></li>
+    </ul>
 
-            <p>
-                Hi, I'm Sabbir Ahmed, a third-year CS PhD student at SUNY Binghamton. My research focuses on the Security and Efficiency of Deep Learning, with extensive experience in both Computer Vision and Natural Language Processing (NLP).
-            </p>
-            
-            <p>
-                Before starting my PhD, I completed my MS in EE from the University of California Riverside and my BSc in EEE from Bangladesh University of Engineering and Technology. I also worked as a Machine Learning Engineer at REVE Systems, Bangladesh, where I contributed to various AI-driven projects involving both Computer Vision and NLP.
-            </p>            
+    <!-- 3. Experience ------------------------------------------------------------ -->
+    <section class="section" id="experience">
+        <h2>Experience</h2>
+        <ol class="rows">
+            <li class="row">
+                <div class="row-head">
+                    <h3>Software Engineer II <span class="org">&middot; Uber</span></h3>
+                    <span class="when">Jun 2026 &ndash; Present</span>
+                </div>
+                <p>Core Security Engineering, New York. LLM agents and machine learning for security.</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3>PhD Software Engineering Intern <span class="org">&middot; Uber</span></h3>
+                    <span class="when">Jun &ndash; Sep 2025</span>
+                </div>
+                <p>Machine learning for access management.</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3>Research Intern <span class="org">&middot; Sony AI</span></h3>
+                    <span class="when">Aug &ndash; Nov 2024</span>
+                </div>
+                <p>Efficient Vision Transformers for edge devices. This work became MixA (ICCV 2025).</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3>Graduate Research Assistant <span class="org">&middot; SUNY Binghamton</span></h3>
+                    <span class="when">Jan 2023 &ndash; May 2026</span>
+                </div>
+                <p>ML Security Research Lab. Model compression, backdoor and Trojan attacks, and defenses for models that adapt to new domains.</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3>Machine Learning Engineer <span class="org">&middot; REVE Systems</span></h3>
+                    <span class="when">Feb 2020 &ndash; Aug 2021</span>
+                </div>
+                <p>Built a production grammar and spell checker for Bengali.</p>
+            </li>
+        </ol>
+    </section>
 
-            <p>
-                My research has been published in multiple top-tier AI/ML conferences including CVPR and ICCV.
-            </p>
+    <!-- 4. Selected research ----------------------------------------------------- -->
+    <section class="section" id="research">
+        <h2>Selected research</h2>
+        <div>
+            <ol class="papers">
+                <li class="paper">
+                    <div class="tags"><span class="tag">DATE 2026</span><span class="tag tag-award">Best Paper</span></div>
+                    <h3>INSPIRE: In-Sensor Compressed Weight Retrieval for Enhancing ViT Efficiency at Edge</h3>
+                    <p class="sum">Compressed model weights are retrieved inside the sensor, so Vision Transformers run efficiently on edge devices.</p>
+                </li>
+                <li class="paper">
+                    <div class="tags"><span class="tag">WACV 2026</span><span class="tag tag-award">Oral</span></div>
+                    <h3><a href="https://openaccess.thecvf.com/content/WACV2026/html/Ahmed_Unified_Alignment_Protocol_Making_Sense_of_the_Unlabeled_Data_in_WACV_2026_paper.html" target="_blank" rel="noopener">Unified Alignment Protocol: Making Sense of the Unlabeled Data in New Domains</a></h3>
+                    <p class="sum">A way to learn from unlabeled data that still works when the test data comes from a new domain.</p>
+                </li>
+                <li class="paper">
+                    <div class="tags"><span class="tag">ICCV 2025</span></div>
+                    <h3><a href="https://openaccess.thecvf.com/content/ICCV2025/html/Ahmed_MixA_A_Mixed_Attention_approach_with_Stable_Lightweight_Linear_Attention_ICCV_2025_paper.html" target="_blank" rel="noopener">MixA: A Mixed Attention approach with Stable Lightweight Linear Attention to enhance Efficiency of Vision Transformers at the Edge</a></h3>
+                    <p class="sum">Mixes linear and quadratic attention in any Transformer. Vision Transformers run up to 30% faster.</p>
+                </li>
+                <li class="paper">
+                    <div class="tags"><span class="tag">CVPR 2025</span></div>
+                    <h3><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Ahmed_DeepCompress-ViT_Rethinking_Model_Compression_to_Enhance_Efficiency_of_Vision_Transformers_CVPR_2025_paper.html" target="_blank" rel="noopener">DeepCompress-ViT: Rethinking Model Compression to Enhance Efficiency of Vision Transformers at the Edge</a></h3>
+                    <p class="sum">A compression method that adds to pruning and quantization. Models become 15 to 20 times smaller.</p>
+                </li>
+                <li class="paper">
+                    <div class="tags"><span class="tag">CVPR 2024</span></div>
+                    <h3><a href="https://openaccess.thecvf.com/content/CVPR2024/html/Ahmed_Deep-TROJ_An_Inference_Stage_Trojan_Insertion_Algorithm_through_Efficient_Weight_CVPR_2024_paper.html" target="_blank" rel="noopener">Deep-TROJ: An Inference Stage Trojan Insertion Algorithm through Efficient Weight Replacement Attack</a></h3>
+                    <p class="sum">Shows that a Trojan can be inserted into a model at inference time by replacing a small part of its weights.</p>
+                </li>
+                <li class="paper">
+                    <div class="tags"><span class="tag">ICCV 2023</span></div>
+                    <h3><a href="https://openaccess.thecvf.com/content/ICCV2023/html/Ahmed_SSDA_Secure_Source-Free_Domain_Adaptation_ICCV_2023_paper.html" target="_blank" rel="noopener">SSDA: Secure Source-Free Domain Adaptation</a></h3>
+                    <p class="sum">A new attack surface: backdoors survive when a model adapts to a new domain. Our defense cuts attack success to under 5%.</p>
+                </li>
+            </ol>
+            <p class="more"><a href="/publications/">All publications &rarr;</a></p>
+        </div>
+    </section>
 
-            <!-- <p>
-                Feel free to reach me at: <span style="color:green">sahmed9@binghamton.edu</span>
-            </p> -->
-
-            <h5>External links</h5> 
-            <ul>
-                <li><a href='https://scholar.google.com/citations?user=TVcMzOAAAAAJ&hl=en' class='link-danger' target='_blank'>Google Scholar</a></li>
-                <!-- <li><a href='https://dblp.uni-trier.de/pid/139/2338.html' class='link-danger' target='_blank'>DBLP</a></li> -->
-                <li><a href='https://www.linkedin.com/in/sabbirahmed1006/' class='link-danger' target='_blank'>LinkedIn</a></li>
-                <li><a href='https://x.com/Sahmed9Ahmed' class='link-danger' target='_blank'>X</a></li>
-            </ul>
-
-            <hr>
-            <h2>Recent News</h2>
-            <div class="mb-5">
-                <h5>February 2025</h5>
-                <p class="mx-2">Our paper on highly compressed Vision Transformers has been accepted at CVPR 2025!</p>
-                
-                <h5>November 2024</h5>
-                <p class="mx-2">Serving as a Reviewer for CVPR 2025.</p>
-
-                <h5>November 2024</h5>
-                <p class="mx-2">Our team secured second runner-up in the eBay ML 2024 competition, where we developed a solution for extracting vehicle fitment from advertised data using LLMs such as Mistral Nemo 12B and Qwen 2.5 14B.</p>
-
-                <h5>July 2024</h5>
-                <p class="mx-2">I am going to join SONY AI as a Research Intern in Fall 2024.</p>
-
-                <h5>February 2024</h5>
-                <p class="mx-2">Our paper on exploring a novel attack surface has been accepted at CVPR 2024!</p>
-
-                <h5>December 2023</h5>
-                <p class="mx-2">Our team secured second runner-up in the eBay ML 2023 competition, where we developed a semi-supervised teacher-student framework to enhance product tag tiling performance using RoBERTa.</p>
-
-                <h5>July 2023</h5>
-                <p class="mx-2">Our paper on improving the safety of Source-Free Domain Adaptation has been accepted at ICCV 2023!</p>
+    <!-- 5. Projects and competitions ------------------------------------------- -->
+    <section class="section" id="projects">
+        <h2>Projects and competitions</h2>
+        <div>
+            <div class="cards">
+                <article class="card">
+                    <p class="metric">1st runner-up</p>
+                    <h3>eBay ML Challenge 2025</h3>
+                    <p>Sequence tagging on eBay listings. Third year in a row in the top 3.</p>
+                    <ul class="chips"><li class="chip">NLP</li><li class="chip">Named entity recognition</li></ul>
+                </article>
+                <article class="card">
+                    <p class="metric">79.6%<small>F0.2</small></p>
+                    <h3><a href="/projects/">eBay ML Challenge 2024</a></h3>
+                    <p>2nd runner-up. LoRA-tuned LLMs read a car-part listing and list each vehicle that the part fits.</p>
+                    <ul class="chips"><li class="chip">LLMs</li><li class="chip">LoRA</li><li class="chip">Ensembles</li></ul>
+                </article>
+                <article class="card">
+                    <p class="metric">94.37%<small>F1</small></p>
+                    <h3><a href="/projects/">eBay ML Challenge 2023</a></h3>
+                    <p>2nd runner-up. Teacher and student models learn named entities from unlabeled item titles.</p>
+                    <ul class="chips"><li class="chip">NER</li><li class="chip">Semi-supervised</li></ul>
+                </article>
+                <article class="card">
+                    <p class="metric">+68.8%<small>over the DDQN baseline</small></p>
+                    <h3><a href="/projects/ms-pacman-rl/">Ms. Pac-Man from pixels</a></h3>
+                    <p>Reward shaping and a self-supervised helper task make a deep RL agent play better.</p>
+                    <ul class="chips"><li class="chip">Reinforcement learning</li><li class="chip">PyTorch</li></ul>
+                </article>
             </div>
-            <hr>
-            <!-- <h2>Recent Blog Posts</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Fine-tuning LLMs for Specialized Tasks</h5>
-                            <p class="card-text small">Insights from the eBay 2024 competition on fine-tuning large language models...</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0">
-                            <a href="/blogs/fine-tuning-llms.html" class="btn btn-sm btn-outline-danger">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add more blog previews here -->
-            <!-- </div> --> 
-            <!-- <div class="text-end mb-4">
-                <a href="/blogs/" class="link-danger">See all blog posts &rarr;</a>
-            </div> -->
-                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                  </button> -->
+            <p class="note">Also: Kaggle Expert, top 2% in APTOS 2019, and 6th in the IEEE Signal Processing Cup 2019.</p>
+            <p class="more"><a href="/projects/">All projects &rarr;</a></p>
+        </div>
+    </section>
 
-                <!-- Modal -->
-                <div class="modal fade" id="feb-2022-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <!-- <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> -->
-                        <div class="modal-body mb-2 p-2">
-                            <img class="rounded shadow img-fluid" src="/assets/img_people/arin_feb2022.png" data-holder-rendered="true">
-                        </div>
-                        <div class="modal-footer">
-                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                    </div>
-                    </div>
+    <!-- 6. Writing ------------------------------------------------------------- -->
+    <section class="section" id="writing">
+        <h2>Writing</h2>
+        <ol class="rows">
+            <li class="row">
+                <div class="row-head">
+                    <h3><a href="/blogs/human-eval.html">Evaluating LLMs for Code Generation: HumanEval Benchmarking</a></h3>
+                    <span class="when">Mar 2025</span>
                 </div>
-                <div class="modal fade" id="dec-2024-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body mb-2 p-2">
-                            <img class="rounded shadow img-fluid" src="/assets/img_people/fall2024convocation.jpg" data-holder-rendered="true">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                    </div>
-                    </div>
+                <p>Five open-source LLMs on the HumanEval benchmark for code generation.</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3><a href="/blogs/fine-tuning-llms.html">Fine-tuning LLMs for Specialized Tasks: Lessons from the eBay Competition</a></h3>
+                    <span class="when">Mar 2025</span>
                 </div>
+                <p>What worked when we fine-tuned LLMs to extract vehicle fitment data.</p>
+            </li>
+        </ol>
+    </section>
 
+    <!-- 7. Education ------------------------------------------------------------- -->
+    <section class="section" id="education">
+        <h2>Education</h2>
+        <ol class="rows">
+            <li class="row">
+                <div class="row-head">
+                    <h3>Ph.D., Computer Science <span class="org">&middot; SUNY Binghamton</span></h3>
+                    <span class="when">2023 &ndash; 2026</span>
+                </div>
+                <p>GPA 4.0 / 4.0. Excellence in Research Award.</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3>M.S., Electrical Engineering <span class="org">&middot; University of California, Riverside</span></h3>
+                    <span class="when">2021 &ndash; 2022</span>
+                </div>
+                <p>GPA 3.96 / 4.0.</p>
+            </li>
+            <li class="row">
+                <div class="row-head">
+                    <h3>B.Sc., Electrical and Electronic Engineering <span class="org">&middot; BUET, Bangladesh</span></h3>
+                    <span class="when">2015 &ndash; 2019</span>
+                </div>
+            </li>
+        </ol>
+    </section>
 
+    <!-- 8. Contact --------------------------------------------------------------- -->
+    <section class="section" id="contact">
+        <h2>Contact</h2>
+        <div>
+            <p class="contact-line">Email is the best way to reach me.</p>
+            <div class="actions">
+                <a class="btn btn-primary" href="mailto:sahmed9@binghamton.edu">sahmed9@binghamton.edu</a>
+                <a class="btn" href="https://www.linkedin.com/in/sabbirahmed1006/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
             </div>
+        </div>
+    </section>
 
-        </div> <!-- end container -->
-    </main>
+</main>
 
-    <footer class="footer mt-auto py-3 bg-light border border-top" id="footer">
-        <script>
-            $(function() {
-                $("#footer").load("/assets/html/footer.html");
-            });
-        </script>
-    </footer>
+<footer class="sa-footer">
+    <div class="sa-wrap">
+        <span>&copy; 2026 Sabbir Ahmed. Last updated November 2026.</span>
+        <span>
+            <a href="https://scholar.google.com/citations?user=TVcMzOAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+            <a href="https://github.com/sabbiracoustic1006" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/sabbirahmed1006/" target="_blank" rel="noopener">LinkedIn</a>
+        </span>
+    </div>
+</footer>
 
-
-
-
-
-
-
-    </body>
+</body>
 </html>
